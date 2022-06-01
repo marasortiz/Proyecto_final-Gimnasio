@@ -12,11 +12,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 
 /* FORM */
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { MatButtonModule } from '@angular/material/button';
+
+
 
 @NgModule({
   declarations: [AppComponent, FormularioComponent],
@@ -30,6 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

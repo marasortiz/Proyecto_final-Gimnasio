@@ -1,54 +1,56 @@
 <div class="content" role="main">
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab>
+
+  <mat-tab-group mat-align-tabs="center" #tabgroup>
+    <mat-tab label="Tab 1">
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">list</mat-icon>
         Lista de Socios
       </ng-template>
-      Content 1
     </mat-tab>
 
-    <mat-tab>
+    <mat-tab label="Tab 2">
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">group_add</mat-icon>
         Altas Nuevas
       </ng-template>
-
-      <form action="">
+      <form class="form" [formGroup]="ListaSocios" (ngSubmit)="onSubmit(tabgroup)">
         <div class="form-box">
           <!-- Nombre / Apellidos -->
           <div class="container-form center">
             <mat-form-field hintLabel="Minimo 3 caracteres" appearance="outline">
               <mat-label>Nombre</mat-label>
-              <input matInput #input minlength="3" placeholder="">
-              <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
+              <input matInput #name id="name" formControlName="name" name="name" minlength="3" placeholder="">
+              <mat-hint align="end">{{name.value?.length || 0}}</mat-hint>
             </mat-form-field>
 
             <mat-form-field hintLabel="Minimo 3 caracteres" appearance="outline">
               <mat-label>Apellidos</mat-label>
-              <input matInput #input minlength="3" placeholder="">
-              <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
+              <input matInput #surname id="surname" formControlName="surname" name="surname" minlength="3"
+                placeholder="">
+              <mat-hint align="end">{{surname.value?.length || 0}}</mat-hint>
             </mat-form-field>
           </div>
           <!-- DNI / Telefono -->
           <div class="container-form center">
             <mat-form-field hintLabel="8 números y 1 letra" appearance="outline">
               <mat-label>DNI</mat-label>
-              <input matInput #input minlength="9" maxlength="9" placeholder="">
-              <mat-hint align="end">{{input.value?.length || 0}}/9</mat-hint>
+              <input matInput #id id="id" formControlName="id" name="id" minlength="9" maxlength="9" placeholder=""
+                pattern="^[0-9]{8,8}[A-Za-z]$">
+              <mat-hint align="end">{{id.value?.length || 0}}/9</mat-hint>
             </mat-form-field>
 
             <mat-form-field hintLabel="" appearance="outline">
               <mat-label>Telefono</mat-label>
-              <input matInput #input minlength="9" maxlength="9" placeholder="" type="number">
-              <mat-hint align="end">{{input.value?.length || 0}}/9</mat-hint>
+              <input matInput #phone id="phone" formControlName="phone" name="phone" minlength="9" maxlength="9"
+                placeholder="" type="number">
+              <mat-hint align="end">{{phone.value?.length || 0}}/9</mat-hint>
             </mat-form-field>
           </div>
           <!-- Genero -->
           <div class="container-form center">
             <mat-form-field appearance="fill" class="full-width-field">
               <mat-label>Genero</mat-label>
-              <mat-select>
+              <mat-select disableRipple formControlName="gender" id="gender" name="gender">
                 <mat-option value="Masculino">Masculino</mat-option>
                 <mat-option value="Femenino">Femenino</mat-option>
               </mat-select>
@@ -57,7 +59,7 @@
           </div>
           <!-- Botón -->
           <div class="container-form center">
-            <button mat-fab color="primary" aria-label="Enviar formulacio">
+            <button mat-fab color="primary" aria-label="Enviar formulario" type="submit">
               <mat-icon>send</mat-icon>
             </button>
           </div>
@@ -68,11 +70,12 @@
 
     </mat-tab>
 
-    <mat-tab>
+    <mat-tab label="Tab 3">
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">backspace</mat-icon>
         Modificar / Borrar Socios
       </ng-template>
+      <button (click)="changeIndex(tabgroup)">Lista</button>
       Content 3
     </mat-tab>
   </mat-tab-group>
