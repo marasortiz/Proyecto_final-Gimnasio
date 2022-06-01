@@ -6,6 +6,25 @@
         <mat-icon class="tab-icon">list</mat-icon>
         Lista de Socios
       </ng-template>
+      <mat-list>
+        <h2 class="center">Socios</h2>
+        <mat-list-item *ngFor="let p of array">
+          <mat-icon mat-list-icon>contacts</mat-icon>
+          <div>
+            <span>{{ p == arrayCheck ? ListaSocios.value.name : p.name }}</span>&nbsp;&nbsp;
+            <span>{{
+              p == arrayCheck ? ListaSocios.value.surname : p.surname
+            }}</span>&nbsp;
+            <span>Número de socio:
+              {{ p == arrayCheck ? ListaSocios.value.member : p.member }}</span><br />
+            <span>DNI: {{ p == arrayCheck ? ListaSocios.value.id : p.id }}</span>&nbsp;
+            <span>Telefono:
+              {{ p == arrayCheck ? ListaSocios.value.phone : p.phone }} </span>&nbsp;
+            <span>Genero:
+              {{ p == arrayCheck ? ListaSocios.value.gender : p.gender }}</span>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </mat-tab>
 
     <mat-tab label="Tab 2">
@@ -13,7 +32,7 @@
         <mat-icon class="tab-icon">group_add</mat-icon>
         Altas Nuevas
       </ng-template>
-      <form class="form" [formGroup]="ListaSocios" (ngSubmit)="onSubmit(tabgroup)">
+      <form class="" [formGroup]="ListaSocios" (ngSubmit)="onSubmit(tabgroup)">
         <div class="form-box">
           <!-- Nombre / Apellidos -->
           <div class="container-form center">
@@ -75,8 +94,88 @@
         <mat-icon class="tab-icon">backspace</mat-icon>
         Modificar / Borrar Socios
       </ng-template>
-      <button (click)="changeIndex(tabgroup)">Lista</button>
-      Content 3
+
+      <mat-list>
+        <h2 class="center">Socios</h2>
+        <mat-list-item *ngFor="let p of array">
+          <mat-icon mat-list-icon>contacts</mat-icon>
+          <div>
+            <span>{{ p == arrayCheck ? ListaSocios.value.name : p.name }}</span>&nbsp;&nbsp;
+            <span>{{ p == arrayCheck ? ListaSocios.value.surname : p.surname }}</span>&nbsp;
+            <span>Número de socio: {{ p == arrayCheck ? ListaSocios.value.member : p.member }}</span><br />
+            <span>DNI: {{ p == arrayCheck ? ListaSocios.value.id : p.id }}</span>&nbsp;
+            <span>Telefono: {{ p == arrayCheck ? ListaSocios.value.phone : p.phone }} </span>&nbsp;
+            <span>Genero: {{ p == arrayCheck ? ListaSocios.value.gender : p.gender }}</span>
+          </div>
+          <p>
+            <button mat-raised-button color="basic" (click)="
+              p == arrayCheck
+                ? terminarModificacion($event, p)
+                : modificar($event, p)
+            ">
+              {{ p == arrayCheck ? "Hecho" : "Modificar" }}
+            </button>
+            &nbsp;&nbsp;
+            <button mat-mini-fab color="warn" aria-label="Borrar" (click)="eliminar($event, p)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </p>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+
+      <button mat-raised-button color="primary" aria-label="Inicio" (click)="changeIndex(tabgroup)"
+        class="center_button">
+        Volver a la lista
+      </button>
+
+      <form class="hidden" [formGroup]="ListaSocios" (ngSubmit)="onSubmit(tabgroup)" id="modificacion">
+        <div class="form-box">
+          <!-- Nombre / Apellidos -->
+          <div class="container-form center">
+            <mat-form-field hintLabel="Minimo 3 caracteres" appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input matInput #name id="name" formControlName="name" name="name" minlength="3" placeholder="">
+              <mat-hint align="end">{{name.value?.length || 0}}</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field hintLabel="Minimo 3 caracteres" appearance="outline">
+              <mat-label>Apellidos</mat-label>
+              <input matInput #surname id="surname" formControlName="surname" name="surname" minlength="3"
+                placeholder="">
+              <mat-hint align="end">{{surname.value?.length || 0}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- DNI / Telefono -->
+          <div class="container-form center">
+            <mat-form-field hintLabel="8 números y 1 letra" appearance="outline">
+              <mat-label>DNI</mat-label>
+              <input matInput #id id="id" formControlName="id" name="id" minlength="9" maxlength="9" placeholder=""
+                pattern="^[0-9]{8,8}[A-Za-z]$">
+              <mat-hint align="end">{{id.value?.length || 0}}/9</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field hintLabel="" appearance="outline">
+              <mat-label>Telefono</mat-label>
+              <input matInput #phone id="phone" formControlName="phone" name="phone" minlength="9" maxlength="9"
+                placeholder="" type="number">
+              <mat-hint align="end">{{phone.value?.length || 0}}/9</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- Genero -->
+          <div class="container-form center">
+            <mat-form-field appearance="fill" class="full-width-mod">
+              <mat-label>Genero</mat-label>
+              <mat-select disableRipple formControlName="gender" id="gender" name="gender">
+                <mat-option value="Masculino">Masculino</mat-option>
+                <mat-option value="Femenino">Femenino</mat-option>
+              </mat-select>
+              <mat-hint align="end">Selecciona una opción</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
     </mat-tab>
   </mat-tab-group>
 </div>

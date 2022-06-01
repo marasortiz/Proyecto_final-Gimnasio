@@ -18,6 +18,10 @@
   width: 81%;
 }
 
+.full-width-mod {
+  width: 78%;
+}
+
 
 .content {
   display: flex;
@@ -26,4 +30,17 @@
   max-width: 960px;
   flex-direction: column;
   align-items: center;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.visible{
+  visibility: visible;
+}
+
+.center_button{
+  margin-top: 20px;
+  left: 40%;
 }

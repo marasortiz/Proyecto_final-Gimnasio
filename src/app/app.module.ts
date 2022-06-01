@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { MatButtonModule } from '@angular/material/button';
 
+/* LIST */
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

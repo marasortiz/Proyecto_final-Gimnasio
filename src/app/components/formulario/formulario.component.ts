@@ -8,6 +8,7 @@ import { Validators } from '@angular/forms';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatTabGroup } from '@angular/material/tabs';
 
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -71,7 +72,7 @@ export class FormularioComponent implements OnInit {
   }
 
   /* Eliminar Socio */
-  /* eliminar(event: MouseEvent, user: User): void {
+  eliminar(event: MouseEvent, user: Socio): void {
     for (let i = this.array.length - 1; i >= 0; i--) {
       if (this.array[i] == user) {
         this.array.splice(i, 1);
@@ -79,41 +80,42 @@ export class FormularioComponent implements OnInit {
     }
 
     if (this.arrayCheck != null && this.arrayCheck == user) {
-      this.agenda.reset();
+      this.ListaSocios.reset();
       this.arrayCheck = null;
     }
-  } */
+  }
 
   /* Modificar Socios */
-  /* modificar(event: MouseEvent, user: User): void {
-    this.agenda.controls['name'].setValue(user.name);
-    this.agenda.controls['surname'].setValue(user.surname);
-    this.agenda.controls['age'].setValue(user.age);
-    this.agenda.controls['id'].setValue(user.id);
-    this.agenda.controls['birthday'].setValue(user.birthday);
-    this.agenda.controls['color'].setValue(user.color);
-    this.agenda.controls['gender'].setValue(user.gender);
+  modificar(event: MouseEvent, user: Socio): void {
+    this.ListaSocios.controls['name'].setValue(user.name);
+    this.ListaSocios.controls['surname'].setValue(user.surname);
+    this.ListaSocios.controls['id'].setValue(user.id);
+    this.ListaSocios.controls['phone'].setValue(user.phone);
+    this.ListaSocios.controls['gender'].setValue(user.gender);
 
     this.arrayCheck = user;
+
+    // @ts-ignore: Object is possibly 'null'.
+    document.getElementById('modificacion').className = 'visible';
   }
 
 
-  terminarModificacion(event: MouseEvent, user: User): void {
+  terminarModificacion(event: MouseEvent, user: Socio): void {
     for (let p of this.array) {
       if (p == user) {
-        p.name = this.agenda.value.name;
-        p.surname = this.agenda.value.surname;
-        p.age = this.agenda.value.age;
-        p.id = this.agenda.value.id;
-        p.birthday = this.agenda.value.birthday;
-        p.color = this.agenda.value.color;
-        p.gender = this.agenda.value.gender;
+        p.name = this.ListaSocios.value.name;
+        p.surname = this.ListaSocios.value.surname;
+        p.id = this.ListaSocios.value.id;
+        p.phone = this.ListaSocios.value.phone;
+        p.gender = this.ListaSocios.value.gender;
 
-        this.agenda.reset();
+        this.ListaSocios.reset();
         this.arrayCheck = null;
 
         break;
       }
     }
-  } */
+    // @ts-ignore: Object is possibly 'null'.
+    document.getElementById('modificacion').className = 'hidden';
+  }
 }
